@@ -5,7 +5,7 @@
   <title>Banking</title>
   <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
   <link href="node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
-   <link href="css/app.css" rel="stylesheet" />
+  <link href="css/app.css" rel="stylesheet" />
   <script src="node_modules/angular/angular.js"></script>
   <script src="js/accounts.js"></script>
   <script src="js/banking.js"></script>
@@ -16,44 +16,52 @@
     <h1>Banking</h1>
   </div>
   <div class="container" ng-controller="getAccountsCtrl">
-    <div ng-repeat="account in accounts">
-      <div class="row panel panel-info panel-account">
+    <div ng-repeat="account in accounts" class="row panel panel-info panel-account">
+      <div class="row panel panel-info panel-paymentList">
         <div class="col-md-6">
-          <h3>{{account.name}}</h3>
+          <h3 ng-bind="account.name"></h3>
           <p>{{account.balance | currency}}</p>
         </div>
         <div class="col-md-2" ng-controller="withdrawCtrl">
-          <input class="input" type="number" ng-model="account.withdraw" min="100000" max="{{account.balance-100000}}"step="50000"></input>
+          <input class="input form-control" type="number" ng-model="account.withdraw" min="100000" max="{{account.balance-100000}}"step="50000"></input>
           <button type="button" class="btn btn-info" ng-click="change(account)">Withdraw</button>
         </div>
         <div class="col-md-2" ng-controller="depositCtrl">
-          <input class="input" type="number" ng-model="account.deposit" min="100000" step="50000"></input>
+          <input class="input form-control" type="number" ng-model="account.deposit" min="100000" step="50000"></input>
           <button type="button" class="btn btn-info" ng-click="change(account)">Deposit</button>
         </div>
         <div class="col-md-2">
           <button type="button" class="btn btn-info input" ng-click="showList=!showList">History</button>
-        </div>
+        </div>        
       </div>
-
-      <div ng-show="showList" ng-repeat="item in paymentsList">
-        <div ng-show="item.name==account.name" class="row panel panel-primary">
-          <div class="col-md-4">
-            <h5 ng-show="item.number<0">Withdraw</h5>
-            <h5 ng-show="item.number>0">Deposit</h5>
-          </div>
-          <div class="col-md-4">
-            <h5>{{item.number | currency}}</h5>
-          </div>
-          <div class="col-md-4">
-            <h5>{{item.date | date: "hh:mm:ss - MMM/dd/yyyy"}}</h5>
+      
+      <div ng-show="showList" class="panel-showList">
+        <!--filter-->
+        <div class="row">
+          <div class="panel payment-kind col-md-6">
+            <select class="form-control" ng-model="paymentType" ng-options="value as key for (key, value) in paymentOptions">
+            </select>    
+          </div>    
+          <div class="panel col-md-6">
+            <input class="form-control" type="date" ng-model="paymentDate"></input>          
           </div>
         </div>
-      </div>
 
+        <div ng-repeat="item in paymentsList | accountsFilter:account.id | paymentsFilter:paymentType">
+          <div class="row panel panel-info" ng-class="item.type==1 ? 'withdraw':'deposit'">
+            <div class="col-md-4">
+              <h5>{{item.type==1?"Withdraw":"Deposit"}}</h5>
+            </div>
+            <div class="col-md-4">
+              <h5>{{item.number | currency}}</h5>
+            </div>
+            <div class="col-md-4">
+              <h5>{{item.date | date: "hh:mm:ss - MMM/dd/yyyy"}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    
-
   </div>
 </body>
 </html>

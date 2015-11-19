@@ -1,7 +1,48 @@
+html {
+  min-height: 1000px;
+}
 .panel-account{
+  border-style: solid 5px;
+  padding: 0px 15px;
+  /*border-color: #271FC2;*/
+}
+.panel-paymentList{
   background-color: #4DE9EF;
+  margin-bottom: 0px;
 }
 
 .input{
-  margin: 10px 0px;
+  margin: 5px 0px;
+  /*padding: 15px;*/
+}
+
+.panel-showList{
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+option{
+  padding: 10px;
+}
+
+button{
+  width: 100%;
+  border: none;
+}
+
+.payment-kind{
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.withdraw{
+  background-color: #C1F2EF;
+}
+.deposit{
+  background-color: #F5F1EB;
+}
+
+input[type="date"]{
+  margin-left: 40px ;
 }

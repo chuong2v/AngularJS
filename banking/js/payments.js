@@ -2,35 +2,60 @@
 angular.module("bankingApp.Payments", [])
 .controller("withdrawCtrl", function($scope, $rootScope, exposeData){
   $scope.withdrawCount = 0;
-  $scope.paymentsList = exposeData;
+  $scope.paymentsList = exposeData.list;
   $scope.change = function(account){
     if(account.balance >= account.withdraw + 100000){
-      account.balance -= account.withdraw;
+      account.balance =  parseInt(account.balance) - parseInt(account.withdraw);
       $scope.withdrawCount++;
-      var now = new Date();
-      $scope.paymentsList.push({"name": account.name,
-       "number": - account.withdraw,
-       "date": new Date()
-     });
-    }    
+      $scope.paymentsList.push({
+        "id": account.id,
+        "number": account.withdraw,
+        "date": new Date(), 
+        "type": 1
+      });     
+    }
   }
 })
 .controller("depositCtrl", function($scope, exposeData){
   $scope.depositCount = 0;
-  $scope.paymentsList = exposeData;
+  $scope.paymentsList = exposeData.list;
   $scope.change = function(account){
     if(account.deposit > 0){
-      account.balance += account.deposit;
+      account.balance =  parseInt(account.balance) +  parseInt(account.deposit);
       $scope.depositCount++;
-      // var now = new Date();
-      $scope.paymentsList.push({"name": account.name,
+      $scope.paymentsList.push({
+        "id": account.id,
         "number": account.deposit,
-        "date": new Date()
+        "date": new Date(), 
+        "type": 2
       });
     }
   }
 })
 .service("exposeData", function(){
   var list = [];
-  return list;
+  var paymentTypeOptions = {
+    All: 0,
+    Withdraw: 1,
+    Deposit: 2
+  }
+  return {
+    list,
+    paymentTypeOptions
+  }
+})
+.filter("paymentsFilter", function(){
+  return function(input, params){
+    if(params != 0){
+      var out = [];
+      for (var i = 0; i < input.length; i++) {
+        if(input[i].type == params){
+          out.push(input[i]);
+        }
+      }
+      return out;
+    }else{
+      return input;  
+    }   
+  }
 });
