@@ -32,8 +32,8 @@ button{
 }
 
 .payment-kind{
-  margin-left: -15px;
-  margin-right: -15px;
+  /*margin-left: -15px;*/
+  /*margin-right: -15px;*/
 }
 
 .withdraw{
@@ -44,5 +44,5 @@ button{
 }
 
 input[type="date"]{
-  margin-left: 40px ;
+  /*margin-left: 40px ;*/
 }

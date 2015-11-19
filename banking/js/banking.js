@@ -1,2 +1,2 @@
 angular.module("bankingApp", ["bankingApp.Accounts", 
-  "bankingApp.Payments"]);
+  "bankingApp.Payments", "bankingApp.Filters"]);

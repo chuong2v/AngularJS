@@ -10,6 +10,8 @@
   <script src="js/accounts.js"></script>
   <script src="js/banking.js"></script>
   <script src="js/payments.js"></script>
+  <script src="js/filters.js"></script>
+</head>
 </head>
 <body>
   <div class="page-header container">
@@ -43,11 +45,11 @@
             </select>    
           </div>    
           <div class="panel col-md-6">
-            <input class="form-control" type="date" ng-model="paymentDate"></input>          
+            <input class="form-control" type="date" format="dd/mm/yyyy" ng-model="paymentDate"></input>          
           </div>
         </div>
 
-        <div ng-repeat="item in paymentsList | accountsFilter:account.id | paymentsFilter:paymentType">
+        <div ng-repeat="item in paymentsList | accountsFilter:account.id | paymentsFilter:paymentType | dateFilter:paymentDate">
           <div class="row panel panel-info" ng-class="item.type==1 ? 'withdraw':'deposit'">
             <div class="col-md-4">
               <h5>{{item.type==1?"Withdraw":"Deposit"}}</h5>
