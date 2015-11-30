@@ -16,7 +16,7 @@ angular.module("bankingApp.Payments", [])
     }
   }
 })
-.controller("depositCtrl", function($scope, exposeData){
+.controller("depositCtrl", function($scope, $http, exposeData){
   $scope.depositCount = 0;
   $scope.paymentsList = exposeData.list;
   $scope.change = function(account){
@@ -29,6 +29,7 @@ angular.module("bankingApp.Payments", [])
         "date": new Date(), 
         "type": 2
       });
+      // $http.post("accounts/account.json", $scope.paymentList);
     }
   }
 })

@@ -6,15 +6,15 @@ app.controller("TodoController", function($scope, Todos){
 
   Todos.get().success(function (data) {
     $scope.todoList = angular.fromJson(data);
-    $scope.todosCount = $scope.todoList.length;
+    // $scope.todosCount = $scope.todoList.length;
   });
  
-  this.count = function(item){
-    if(item.done)
-      $scope.todosCount--;
-    else
-      $scope.todosCount++;
-  }
+  // this.count = function(item){
+  //   if(item.done)
+  //     $scope.todosCount--;
+  //   else
+  //     $scope.todosCount++;
+  // }
 
   this.setEditable = function(item){
     var index = $scope.todoList.indexOf(item);
@@ -36,7 +36,7 @@ app.controller("TodoController", function($scope, Todos){
       && $scope.newTask!="") {
       var item={title: $scope.newTask, done: false, editable: false};
       $scope.todoList.unshift(item);
-      $scope.todosCount++;
+      // $scope.todosCount++;
       $scope.newTask=null;
     }
   };
@@ -44,8 +44,8 @@ app.controller("TodoController", function($scope, Todos){
   this.removeTodo = function(item){
     var index = $scope.todoList.indexOf(item);
     if(index>-1){
-      if(!item.done)
-        $scope.todosCount--;
+      // if(!item.done)
+        // $scope.todosCount--;
       $scope.todoList.splice(index,1);    
     }
   }

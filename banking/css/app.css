@@ -20,6 +20,7 @@ html {
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  /*min-height: 500px;*/
 }
 
 option{
@@ -45,4 +46,42 @@ button{
 
 input[type="date"]{
   /*margin-left: 40px ;*/
+}
+
+body {
+  position: relative; 
+}
+#section1 {
+  padding:50px;
+  /*height:500px;*/
+  color: #fff; 
+  background-color: #1E88E5;
+}
+
+#section2 {
+  padding:50px;
+  /*height:500px;*/
+  color: #fff; 
+  background-color: #673ab7;
+}
+
+#section3 {
+  padding:50px;
+  /*height:500px;*/
+  color: #fff; 
+  background-color: #ff9800;
+}
+
+#section41 {
+  padding:50px;
+  /*height:500px;*/
+  /*color: #fff;*/
+  /*background-color: #B4AFAF;*/
+}
+
+#section42 {
+  padding:50px;
+  /*height:500px;*/
+  color: #000; 
+  background-color: #009688;
 }
